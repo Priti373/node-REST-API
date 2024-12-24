@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: NODE-REST-APIS
+    env: node
+    plan: free
+    buildCommand: 'npm install'
+    startCommand: 'npm start'
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+    regions:
+      - oregon
+      - frankfurt
+    routes:
+      - type: websocket
+        source: '*'
+        destination: 'ws://localhost:3000'
